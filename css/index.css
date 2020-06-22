@@ -12,7 +12,7 @@ h6 {
 }
 
 .name-container {
-  margin-top: 10vh;
+  margin-top: 5vh;
 }
 
 .name-header {
@@ -20,7 +20,7 @@ h6 {
 }
 
 .fb-container {
-  margin-top: 8vh;
+  margin-top: 5vh;
 }
 
 .fb-at {
@@ -32,7 +32,7 @@ h6 {
 
 .fb-img {
   display: inline-block;
-  max-width: 300px;
+  max-width: 270px;
 }
 
 @media (min-width: 640px) {
@@ -42,7 +42,7 @@ h6 {
 }
 
 .social-row {
-  margin-top: 11vh;
+  margin-top: 10vh;
   justify-content: space-around;
 }
 
@@ -69,11 +69,20 @@ h6 {
 
 
 @media (min-device-width: 640px) {
-  .social-row {
-    justify-content: center !important;
+  .social-link {
+    margin: auto 20px;
   }
 
   .name-container {
+    margin-top: 15vh;
+  }
+
+  .fb-container {
+    margin-top: 9vh;
+  }
+
+  .social-row {
+    justify-content: center !important;
     margin-top: 15vh;
   }
 }
