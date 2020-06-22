@@ -18,3 +18,13 @@ $(".name-header").hover(() => {
 }, () => {
   headerMaterial.uniforms.uApplyBlur.value = 1.0;
 })
+
+function step() {
+  document.querySelector("#feturbulence").baseFrequencyY.baseVal = Math.random() / 10
+  document.querySelector("#feturbulence").baseFrequencyX.baseVal = Math.random() / 10
+  setTimeout(() => {
+    requestAnimationFrame(step)
+  }, 16)
+}
+
+requestAnimationFrame(step);

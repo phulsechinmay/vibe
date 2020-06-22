@@ -12,6 +12,26 @@ h6 {
 }
 
 .name-header {
-  font-size: 7em;
+  font-size: 120px;
   margin-top: 20vh;
+}
+
+i {
+  font-size: 4em;
+}
+
+.github {
+  color: #ff9994;
+}
+
+.linkedin {
+  color: #ECBE7A;
+}
+
+.resume {
+  color: #9DABDD;
+}
+
+.hover-turbulence:hover {
+  -webkit-filter: url("#turbulence-1");
 }
