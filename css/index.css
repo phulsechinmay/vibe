@@ -12,11 +12,38 @@ h6 {
 }
 
 .name-container {
-  margin-top: 15vh;
+  margin-top: 10vh;
 }
 
 .name-header {
   font-size: 9vh;
+}
+
+.fb-container {
+  margin-top: 8vh;
+}
+
+.fb-at {
+  color: #D9EFFC;
+  font-size: 2em;
+  filter: url(#turbulence);
+  -webkit-filter: url("#turbulence");
+}
+
+.fb-img {
+  display: inline-block;
+  max-width: 300px;
+}
+
+@media (min-width: 640px) {
+  .social-row {
+    justify-content: center !important;
+  }
+}
+
+.social-row {
+  margin-top: 11vh;
+  justify-content: space-around;
 }
 
 .social-link {
@@ -38,4 +65,15 @@ h6 {
 .hover-turbulence:hover {
   filter: url(#turbulence);
   -webkit-filter: url("#turbulence");
+}
+
+
+@media (min-device-width: 640px) {
+  .social-row {
+    justify-content: center !important;
+  }
+
+  .name-container {
+    margin-top: 15vh;
+  }
 }
