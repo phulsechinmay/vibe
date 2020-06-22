@@ -1,17 +1,25 @@
-var text = new Blotter.Text("Chinmay Phulse", {
+var firstNameText = new Blotter.Text("Chinmay", {
+  family: "serif",
+  size: parseInt($(".name-header").css("font-size")),
+  fill: "#171717",
+});
+var lastNameText = new Blotter.Text("Phulse", {
   family: "serif",
   size: parseInt($(".name-header").css("font-size")),
   fill: "#171717",
 });
 
+// Setup Blotter Materials
 var headerMaterial = new Blotter.ChannelSplitMaterial();
 headerMaterial.uniforms.uOffset.value = 0.045;
 
-var blotter = new Blotter(headerMaterial, { texts: text });
+var blotter = new Blotter(headerMaterial, { texts: [firstNameText, lastNameText] });
+// potvar lastNameBlotter = new Blotter(headerMaterial, { texts: lastNameText });
 
-var scope = blotter.forText(text);
-
-scope.appendTo($(".name-header"));
+var firstNameScope = blotter.forText(firstNameText);
+firstNameScope.appendTo($("#firstName"));
+var lastNameScope = blotter.forText(lastNameText);
+lastNameScope.appendTo($("#lastName"));
 
 $(".name-header").hover(() => {
   headerMaterial.uniforms.uApplyBlur.value = 0.0;

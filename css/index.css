@@ -11,13 +11,16 @@ h6 {
   color: white;
 }
 
-.name-header {
-  font-size: 120px;
-  margin-top: 20vh;
+.name-container {
+  margin-top: 15vh;
 }
 
-i {
-  font-size: 4em;
+.name-header {
+  font-size: 9vh;
+}
+
+.social-link {
+  font-size: 6vh;
 }
 
 .github {
@@ -33,5 +36,45 @@ i {
 }
 
 .hover-turbulence:hover {
-  -webkit-filter: url("#turbulence-1");
+  filter: url(#turbulence);
+} 
+
+/* @media only screen and (min-device-width : 320px) and (max-device-width : 600px)  {
+  .name-header {
+    font-size: 170px;
+  }
+
+  .social-link {
+    font-size: 7em;
+  }
 }
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+  .name-header {
+    font-size: 170px;
+  }
+
+  .social-link {
+    font-size: 7em;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .name-header {
+    font-size: 100px;
+  }
+
+  .social-link {
+    font-size: 5em;
+  }
+}
+
+@media only screen  and (min-width : 1224px) {
+  .name-header {
+    font-size: 120px;
+  }
+
+  .social-link {
+    font-size: 4em;
+  }
+} */
