@@ -45,4 +45,27 @@ $(document).ready(() => {
   }
 
   requestAnimationFrame(step);
+
+  const getCenterCoordinates = (elem) => {
+    const offset = $(elem).offset();
+    const x = offset.left + $(elem).width() / 2;
+    const y = offset.top + $(elem).height() / 2;
+    return { x, y };
+  };
+
+  const calculateAngle = (p1, p2) =>
+    (Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180) / Math.PI;
+
+  // Change blue rotation when mouse moves inside name-container.
+  $(document).mousemove((e) => {
+    if ($('.name-container').is(':hover')) {
+      const mousePos = { x: e.pageX, y: e.pageY };
+      const rawAngle = calculateAngle(
+        mousePos,
+        getCenterCoordinates(".name-container")
+      );
+      const angle = rawAngle > 0 ? rawAngle : 360 + rawAngle;
+      headerMaterial.uniforms.uRotation.value = angle;
+    }
+  });
 });
