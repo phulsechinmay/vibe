@@ -41,7 +41,7 @@ $(document).ready(() => {
       Math.random() / 10;
     setTimeout(() => {
       requestAnimationFrame(step);
-    }, 16);
+    }, 50);
   }
 
   requestAnimationFrame(step);

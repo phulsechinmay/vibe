@@ -26,8 +26,6 @@ h6 {
 .fb-at {
   color: #D9EFFC;
   font-size: 2em;
-  filter: url(#turbulence);
-  -webkit-filter: url("#turbulence");
 }
 
 .fb-img {
@@ -62,7 +60,12 @@ h6 {
   color: #9DABDD;
 }
 
-.hover-turbulence:hover {
+.hover-turbulence > a:hover {
+  filter: url(#turbulence);
+  -webkit-filter: url("#turbulence");
+}
+
+.infinite-turbulence > svg {
   filter: url(#turbulence);
   -webkit-filter: url("#turbulence");
 }
