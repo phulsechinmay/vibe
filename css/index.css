@@ -60,7 +60,7 @@ h6 {
   color: #9DABDD;
 }
 
-.hover-turbulence > a:hover {
+.hover-turbulence:hover {
   filter: url(#turbulence);
   -webkit-filter: url("#turbulence");
 }
