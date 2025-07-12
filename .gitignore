@@ -97,6 +97,9 @@ Thumbs.db
 *.key
 *.pem
 
+# vibe coding stuff
+CLAUDE.md
+
 # -------------------------
 # BEGIN Whitelisted Files
 # -------------------------
