@@ -60,6 +60,10 @@ h6 {
   color: #9DABDD;
 }
 
+.feast {
+  color: #B8E6B8;
+}
+
 .hover-turbulence:hover {
   filter: url(#turbulence);
   -webkit-filter: url("#turbulence");
