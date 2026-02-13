@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pastel — Clipboard Manager for Mac</title>
+  <meta name="description" content="A beautiful, privacy-first clipboard manager for macOS. Never lose what you copy.">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --border: #222;
+      --text: #e8e8e8;
+      --text-muted: #888;
+      --accent: #a78bfa;
+      --accent-dim: rgba(167, 139, 250, 0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-brand {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links { display: flex; gap: 2rem; }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* Sections */
+    section { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 8rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.02em;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #a78bfa, #818cf8, #6366f1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 2rem;
+      background: var(--text);
+      color: var(--bg);
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .hero-cta:hover { transform: translateY(-1px); opacity: 0.9; }
+
+    .hero-cta svg { width: 18px; height: 18px; }
+
+    .hero-screenshot {
+      margin-top: 4rem;
+      width: 100%;
+      max-width: 1000px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+    }
+
+    .hero-screenshot img {
+      width: 100%;
+      display: block;
+    }
+
+    /* Features */
+    .features-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .features-header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+
+    .features-header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: border-color 0.3s;
+    }
+
+    .feature-card:hover { border-color: #333; }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--accent-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      font-size: 1.2rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* Showcase */
+    .showcase {
+      text-align: center;
+    }
+
+    .showcase h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+
+    .showcase > p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto 3rem;
+    }
+
+    .showcase-img {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
+    }
+
+    .showcase-img img {
+      width: 100%;
+      display: block;
+    }
+
+    /* Privacy */
+    .privacy {
+      text-align: center;
+    }
+
+    .privacy-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4rem 3rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .privacy-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(52, 211, 153, 0.15), rgba(16, 185, 129, 0.05));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .privacy h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .privacy p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .privacy-points {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .privacy-point {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .privacy-check {
+      color: #34d399;
+      font-weight: 700;
+    }
+
+    /* Support */
+    .support {
+      text-align: center;
+    }
+
+    .support h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+
+    .support > p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .support a.support-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .support a.support-link:hover { text-decoration: underline; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .features-grid { grid-template-columns: 1fr; }
+      section { padding: 4rem 1.25rem; }
+      .privacy-box { padding: 2.5rem 1.5rem; }
+      .privacy-points { flex-direction: column; align-items: center; gap: 1rem; }
+      .nav-links { gap: 1.25rem; }
+    }
+
+    @media (max-width: 480px) {
+      nav { padding: 1rem; }
+      .nav-links a { font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="nav-brand">Pastel</a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#support">Support</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-badge">Clipboard Manager for macOS</div>
+    <h1>Copy once.<br><span>Paste forever.</span></h1>
+    <p>Pastel lives in your menu bar and remembers everything you copy — text, images, links, code, colors. Always one hotkey away.</p>
+    <a href="#" class="hero-cta">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Download on the Mac App Store
+    </a>
+    <div class="hero-screenshot">
+      <img src="screenshots/screenshot-1.png" alt="Pastel sliding panel showing clipboard history with text, images, links, and code snippets organized with colorful labels" loading="lazy">
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features">
+    <div class="features-header">
+      <h2>Everything you copy, organized.</h2>
+      <p>Pastel captures all types of content and makes them instantly searchable and accessible.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">&#x2398;</div>
+        <h3>Universal Capture</h3>
+        <p>Text, images, URLs with rich previews, files, syntax-highlighted code, and colors with visual swatches — all captured automatically.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#x26A1;</div>
+        <h3>Instant Paste</h3>
+        <p>Double-click or press Enter to paste into any app. Use Cmd+1 through 9 to quick-paste your most recent items without even opening the panel.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#x1F50D;</div>
+        <h3>Search &amp; Filter</h3>
+        <p>Full-text search across your entire clipboard history. Filter by color-coded labels to find exactly what you need in seconds.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#x1F3F7;</div>
+        <h3>Labels &amp; Organization</h3>
+        <p>Create custom labels with 12 colors and emoji. Assign multiple labels to any item. Organize your clipboard the way you think.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#x2328;</div>
+        <h3>Keyboard-First</h3>
+        <p>Every action has a keyboard shortcut. Navigate with arrow keys, paste with Enter, and manage items without touching your mouse.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#x1F5BC;</div>
+        <h3>History Browser</h3>
+        <p>Browse your full clipboard history in a grid view. Multi-select items for bulk operations. Import and export with .pastel files.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Showcase -->
+  <section class="showcase">
+    <h2>Browse your full history.</h2>
+    <p>A grid view of everything you've ever copied — searchable, filterable, and organized with labels.</p>
+    <div class="showcase-img">
+      <img src="screenshots/screenshot-2.png" alt="Pastel history browser showing a grid of clipboard items including images, code snippets, URLs, and text organized with colorful label chips" loading="lazy">
+    </div>
+  </section>
+
+  <!-- Privacy -->
+  <section id="privacy" class="privacy">
+    <div class="privacy-box">
+      <div class="privacy-icon">&#x1F512;</div>
+      <h2>Your data stays on your Mac.</h2>
+      <p>Pastel stores everything locally. There are no accounts, no cloud sync, no analytics, and no data ever leaves your machine. We don't collect, transmit, or store any of your data.</p>
+      <div class="privacy-points">
+        <div class="privacy-point"><span class="privacy-check">&#x2713;</span> No data collection</div>
+        <div class="privacy-point"><span class="privacy-check">&#x2713;</span> No cloud sync</div>
+        <div class="privacy-point"><span class="privacy-check">&#x2713;</span> No analytics</div>
+        <div class="privacy-point"><span class="privacy-check">&#x2713;</span> App Sandbox enabled</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Support -->
+  <section id="support" class="support">
+    <h2>Support</h2>
+    <p>Have a question, found a bug, or want to request a feature?<br>
+      Reach out at <a href="mailto:phulsechinmay@gmail.com" class="support-link">phulsechinmay@gmail.com</a>
+    </p>
+  </section>
+
+  <footer>
+    &copy; 2025 Pastel. Made for macOS.
+  </footer>
+
+</body>
+</html>
