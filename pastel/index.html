@@ -130,6 +130,33 @@
 
     .hero-cta svg { width: 18px; height: 18px; }
 
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .hero-cta-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 2rem;
+      background: linear-gradient(135deg, #a78bfa, #818cf8, #6366f1);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .hero-cta-secondary:hover { transform: translateY(-1px); opacity: 0.9; }
+
+    .hero-cta-secondary svg { width: 18px; height: 18px; }
+
     .hero-screenshot {
       margin-top: 4rem;
       width: 100%;
@@ -366,10 +393,18 @@
     <div class="hero-badge">Clipboard Manager for macOS</div>
     <h1>Copy once.<br><span>Paste forever.</span></h1>
     <p>Pastel lives in your menu bar and remembers everything you copy — text, images, links, code, colors. Always one hotkey away.</p>
-    <a href="#" class="hero-cta">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-      Download on the Mac App Store
-    </a>
+    <div class="hero-cta-group">
+      <a href="https://github.com/phulsechinmay/pastel/releases/latest" class="hero-cta-secondary" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 16l-6-6h4V4h4v6h4l-6 6zm-7 2h14v2H5v-2z"/></svg>
+        Download DMG
+      </a>
+      <!-- Mac App Store button hidden until app is approved
+      <a href="#" class="hero-cta">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download on the Mac App Store
+      </a>
+      -->
+    </div>
     <div class="hero-screenshot">
       <img src="screenshots/screenshot-1.png" alt="Pastel sliding panel showing clipboard history with text, images, links, and code snippets organized with colorful labels" loading="lazy">
     </div>
