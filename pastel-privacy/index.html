@@ -148,17 +148,27 @@
     </ul>
 
     <h2>Local Data Processing</h2>
-    <p><strong>All data processing occurs exclusively on your device.</strong></p>
+    <p><strong>By default, all data processing occurs exclusively on your device.</strong></p>
     <ul>
-      <li><strong>No data is transmitted to external servers</strong></li>
+      <li><strong>No data is transmitted to Pastel's servers — ever</strong></li>
       <li><strong>No data is shared with third parties</strong></li>
       <li><strong>No analytics or tracking services are used</strong></li>
       <li><strong>All information is stored locally on your Mac using Apple's SwiftData framework</strong></li>
       <li>Data is only used to display and manage your clipboard history within the application</li>
     </ul>
 
+    <h2>iCloud Sync (Optional)</h2>
+    <p>Pastel offers an optional iCloud sync feature that is <strong>disabled by default</strong>. If you choose to enable it:</p>
+    <ul>
+      <li>Your clipboard data syncs directly to your personal iCloud account via Apple's CloudKit framework</li>
+      <li><strong>Pastel never sees, stores, or has access to your synced data</strong> — it goes directly from your device to Apple's servers</li>
+      <li>Data is only accessible to you through your Apple ID and is subject to <a href="https://www.apple.com/legal/privacy/">Apple's Privacy Policy</a></li>
+      <li>You can disable iCloud sync at any time in Pastel's settings, which stops all future syncing</li>
+    </ul>
+    <p>If iCloud sync is disabled (the default), no data ever leaves your Mac.</p>
+
     <h2>Data Security</h2>
-    <p>Since all data remains local to your Mac, it is protected by macOS's built-in security measures and sandboxing. We do not have access to your data, and it cannot be accessed by external parties through our application.</p>
+    <p>Your data is protected by macOS's built-in security measures and sandboxing. Pastel does not have access to your data, and it cannot be accessed by external parties through our application. When iCloud sync is enabled, data in transit and at rest in iCloud is encrypted by Apple.</p>
     <p><strong>Additional Security Measures:</strong></p>
     <ul>
       <li>Pastel respects password manager concealed types and excludes them from history</li>
@@ -195,7 +205,7 @@
     <hr>
 
     <div class="summary">
-      <p>Pastel is designed with privacy as a core principle. Your clipboard data never leaves your Mac, is never shared with us or anyone else, and remains completely under your control.</p>
+      <p>Pastel is designed with privacy as a core principle. Your clipboard data is never seen by us, is never shared with third parties, and remains completely under your control. By default everything stays on your Mac — and if you enable optional iCloud sync, your data goes only to your personal iCloud account, never to Pastel.</p>
     </div>
   </div>
 </body>
